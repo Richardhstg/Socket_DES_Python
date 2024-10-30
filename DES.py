@@ -250,7 +250,9 @@ def encryption(usr_input, key):
 
     result_hex = binary_to_hex(full_result)
     
-    print("Final Cipher text (HEX):", result_hex)
+    # print("Final Cipher text (HEX):", result_hex)
+
+    return result_hex
 
 def decryption(usr_input, key):
     round_keys = internal_key(key)
@@ -300,26 +302,26 @@ def decryption(usr_input, key):
 
     plain_text_result = "".join([chr(int(full_decrypt_result[i : i + 8], 2)) for i in range(0, len(full_decrypt_result), 8)])
     
-    print("Decryption of Cipher:", plain_text_result)
+    print("Message:", plain_text_result)
 
-while True:
-    print('DES')
-    print("1. Encrypt")
-    print("2. Decrypt")
-    print("3. Exit")
+# while True:
+#     print('DES')
+#     print("1. Encrypt")
+#     print("2. Decrypt")
+#     print("3. Exit")
     
-    select = input("Pilih menu: ")
-    if select == "1" :
-        usr_input = input("Masukkan Plain Text: ")
-        external_key = input("Masukkan Key (8 Karakter) : ")
-        encryption(usr_input, external_key)
-        continue
-    elif select == "2" :
-        usr_input = input("Masukkan Hex: ")
-        external_key = input("Masukkan Key (8 karakter) : ")
-        decryption(usr_input, external_key)
-        continue
-    elif select == "3":
-        break
-    else:
-        print("Pilih 1 - 3")
+#     select = input("Pilih menu: ")
+#     if select == "1" :
+#         usr_input = input("Masukkan Plain Text: ")
+#         external_key = input("Masukkan Key (8 Karakter) : ")
+#         encryption(usr_input, external_key)
+#         continue
+#     elif select == "2" :
+#         usr_input = input("Masukkan Hex: ")
+#         external_key = input("Masukkan Key (8 karakter) : ")
+#         decryption(usr_input, external_key)
+#         continue
+#     elif select == "3":
+#         break
+#     else:
+#         print("Pilih 1 - 3")
