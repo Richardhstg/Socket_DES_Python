@@ -9,21 +9,25 @@ def client_program():
     client_socket = socket.socket()  # instantiate
     client_socket.connect((host, port))  # connect to the server
 
-    message = input(" -> ")  # take input
-    key = input("key: ")
+    while True:
+        key = input("key: ")
+        if len(key) == 8:
+            break
+        else:
+            print("Key must have 8 character")
+    
+    message = input("Send Message -> ")  # take input
     message = encryption(message,key)
 
-    while message.lower().strip() != 'bye':
-        client_socket.send(b"Message:" + message.encode() + b"\nKey:" + key.encode())  # send message
+    while True:
+        client_socket.send(message.encode())  # send message
         data = client_socket.recv(1024).decode()  # receive response
 
-        print(data)  # show in terminal
-        parts = data.replace('\nKey', '').split(":")
-        
-        decryption(parts[1], parts[2])
+        print("Message:", decryption(data, key))
 
-        message = input(" -> ")  # take input
-        key = input("key: ")
+        message = input("Send Message -> ")
+        if message == 'exit':
+            break
         message = encryption(message,key)
 
     client_socket.close()  # close the connection
